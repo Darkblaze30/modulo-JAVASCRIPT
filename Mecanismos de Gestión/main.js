@@ -11,6 +11,7 @@ console.log(sessionStorage.getItem("nombre"))               //para obtener el va
 sessionStorage.removeItem("apellido")                       //para eliminar un valor del local storage
 // sessionStorage.clear()                                   //para eliminar todo lo que halla en el local storage
 let openRequest = indexedDB.open("usuario", 1.0);           //crea una base de datos
+
 let db = openRequest.result;
 db.createObjectStore('books', {keyPath: 'id', autoIncrement: true});
 

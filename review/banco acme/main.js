@@ -36,16 +36,16 @@ function menu (){
     let respuesta = prompt(`
         =========== Menu Bancario =============  
         ==================                                   
-           1. Crear un usuario                
-           2. Consignar en la cuenta         
-           3. Retirar dinero                  
-           4. Pagar Servicios                
-           5. Mostrar movimientos              
-           6. Salir                            
-           
-           =======================================
-           `)
-           return respuesta
+        1. Crear un usuario                
+        2. Consignar en la cuenta         
+        3. Retirar dinero                  
+        4. Pagar Servicios                
+        5. Mostrar movimientos              
+        0. Salir                            
+        
+        =======================================
+        `)
+        return respuesta
         }
         
 
@@ -98,7 +98,7 @@ function consignacion (){
                         {
                             "tipo": "consignacion",
                             "referencia": "",
-                            "descripcion": `se ha retirado ${saldo}`,
+                            "descripcion": `se ha consignado ${saldo}`,
                             "saldo": `${cuenta['saldo']}`,
                         }
                     )
@@ -113,6 +113,71 @@ function consignacion (){
     }else alert("cuenta no encontrada intente de nuevo")
 }
 
+function retiro (){
+    const respuesta1 = prompt("Ingrese su numero de cuenta")
+    const respuesta2 = prompt("Ingrese su clave")
+    let encontrada = false
+    cuentas.forEach(cuenta => {
+        if(cuenta["numCt"] === respuesta1 && cuenta["clave"] === respuesta2){
+            alert(`la cuenta a la que ingreso es 
+            numero de cuenta: ${cuenta["numCt"]}
+            nombre: ${cuenta["nombre"]}
+            `)
+            saldo = prompt("cuanto dinero desea retirar?")
+            valor = Number(saldo)
+            if(cuenta["saldo"] < valor){
+                alert("no tiene suficiente saldo")
+            }else{
+            cuenta["saldo"] -= valor
+            movimientos.forEach(movimiento => {
+                if(movimiento["numCt"] === cuenta["numCt"]){
+                    movimiento["movimientos"].push(
+                        {
+                            "tipo": "retiro",
+                            "referencia": "",
+                            "descripcion": `se ha retirado ${saldo}`,
+                            "saldo": `${cuenta['saldo']}`,
+                        }
+                    )
+                }
+            })
+            encontrada = true
+        }
+    }
+    });
+    if(encontrada){
+        alert("retiro exitosa")
+    }else alert("cuenta no encontrada intente de nuevo")
+}
+
+function mostrarMovimientos(){
+    const respuesta1 = prompt("Ingrese su numero de cuenta")
+    const respuesta2 = prompt("Ingrese su clave")
+    let encontrada = false
+    cuentas.forEach(cuenta => {
+        if(cuenta["numCt"] === respuesta1 && cuenta["clave"] === respuesta2){
+            alert(`la cuenta a la que ingreso es 
+            numero de cuenta: ${cuenta["numCt"]}
+            nombre: ${cuenta["nombre"]}
+            `)
+            movimientos.forEach(movimiento => {
+                if(movimiento["numCt"] === cuenta["numCt"]){
+                    movimiento["movimiento"].forEach(Element => {
+                        alert(` "tipo": "retiro",
+                        "referencia": "",
+                        "descripcion": se ha retirado ${saldo},
+                        "saldo": ${cuenta['saldo']}`)
+                        encontrada = true
+                    })
+    }
+})
+    }
+    });
+    if(encontrada){
+        alert("retiro exitosa")
+    }else alert("cuenta no encontrada intente de nuevo")
+}
+
 while (!salir) {
     let key = menu()
     console.log(key)
@@ -123,7 +188,10 @@ while (!salir) {
         case "2":
             consignacion()
             break;
-        case "6": 
+        case "3":
+            retiro()
+            break;
+        case "0": 
         alert("saliendo....")
         salir = true;
         break;

@@ -81,8 +81,28 @@ const elemento = document.getElementById('content');
 
 //insertAdjecentHTML(position, html)
 
-elemento.insertAdjacentHTML(
-    "beforeend",
-    '<div id="item3" class="item borde fuente">Item 3 en el contenedor</div>'
+// elemento.insertAdjacentHTML(
+//     "beforeend",
+//     '<div id="item3" class="item borde fuente">Item 3 en el contenedor</div>'
 
-)
+// )
+// elemento.insertAdjacentText(
+//     "beforeend",
+//     '<texto insertado con insertAdjacentText()'
+
+// )
+
+//Navegar por los elementos
+
+// const nombres = ['Maria', "Juan", "Luis"];
+// nombres.forEach((nombre,indice) => {
+//     elemento.children[indice].textContent = nombre
+// })
+
+elemento.parentElement.setAttribute("style", "border: solid 10px green")
+
+elemento.firstElementChild      //Devuelve el primer elemento hijo
+elemento.lastElementChild       //Devuelve el ultimo elemento hijo
+
+const item2 = document.getElementById("item2")
+console.log(item2.nextElementSibling)

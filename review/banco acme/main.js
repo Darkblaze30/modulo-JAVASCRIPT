@@ -8,22 +8,22 @@ const Inputs = document.getElementById("Inputs")
 const Mensajes = document.getElementById("Mensajes")
 const container = document.getElementById("container")
 
-const MenuPrincipal = `  <div id="Menu">
-            <p>===========Menu============</p>
-            <p>=1. Crear un usuario       =</p>
-            <p>=2. Consignar en la cuenta =</p>
-            <p>=3. Retirar dinero         =</p>
-            <p>=4. Pagar Servicios        =</p>
-            <p>=5. Mostrar movimientos    =</p>
-            <p>=0. Salir                  =</p>
-        </div>
-        <div id="Inputs">
-            <input id="respuesta" placeholder="que desea hacer" type="text">
-            <input id="btn" type="button" value="Seleccionar">
-        </div>
-        <div id="Mensajes">
+const MenuPrincipal = ` <div id="Menu">
+<p>===========Menu============</p>
+<p>=1. Crear un usuario       =</p>
+<p>=2. Consignar en la cuenta =</p>
+<p>=3. Retirar dinero         =</p>
+<p>=4. Pagar Servicios        =</p>
+<p>=5. Mostrar movimientos    =</p>
+<p>=0. Salir                  =</p>
+</div>
+<div id="Inputs">
+<input id="respuesta" placeholder="que desea hacer" type="text">
+<input id="btn" type="button" value="Seleccionar">
+</div>
+<div id="Mensajes">
 
-        </div>`
+</div>`
 
 // // Abrir la conexión con la base de datos (o crearla si no existe)
 // const request = window.indexedDB.open("UsuariosDB", 1);
@@ -78,9 +78,11 @@ function login(){
     <input id='nombre' placeholder='Nombre' type='text'>
     <input id='clave' placeholder='Clave' type='text'>
     <input id="enviar" type="button" value="Enviar">
+    <input id="regresar" type="button" value="Regresar">
     `
 
     const enviar = document.getElementById("enviar")
+    const Regresar = document.getElementById("regresar")
     enviar.addEventListener("click", () => {
         console.log("btn enviar")
         const nombre = document.getElementById("nombre")
@@ -115,6 +117,10 @@ function login(){
         <p>cuenta creada exitosamente</p>
     `
 
+    })
+    Regresar.addEventListener("click", () => {
+        console.log("regresar")
+        container.innerHTML = MenuPrincipal
     })
 
 }  
@@ -261,7 +267,6 @@ function mostrarMovimientos(){
         switch (respuesta.value) {
             case "1":
                 login();
-               
                 break;
             case "2":
                 consignacion()

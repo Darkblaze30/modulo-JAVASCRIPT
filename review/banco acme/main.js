@@ -3,6 +3,28 @@ let salir = false
 let cuentas = []
 let movimientos = []
 
+const Menu = document.getElementById("Menu")
+const Inputs = document.getElementById("Inputs")
+const Mensajes = document.getElementById("Mensajes")
+const container = document.getElementById("container")
+
+const MenuPrincipal = `  <div id="Menu">
+            <p>===========Menu============</p>
+            <p>=1. Crear un usuario       =</p>
+            <p>=2. Consignar en la cuenta =</p>
+            <p>=3. Retirar dinero         =</p>
+            <p>=4. Pagar Servicios        =</p>
+            <p>=5. Mostrar movimientos    =</p>
+            <p>=0. Salir                  =</p>
+        </div>
+        <div id="Inputs">
+            <input id="respuesta" placeholder="que desea hacer" type="text">
+            <input id="btn" type="button" value="Seleccionar">
+        </div>
+        <div id="Mensajes">
+
+        </div>`
+
 // // Abrir la conexión con la base de datos (o crearla si no existe)
 // const request = window.indexedDB.open("UsuariosDB", 1);
 
@@ -32,55 +54,69 @@ let movimientos = []
 //     };
 //   }
 
-function menu (){
-    let respuesta = prompt(`
-        =========== Menu Bancario =============  
-        ==================                                   
-        1. Crear un usuario                
-        2. Consignar en la cuenta         
-        3. Retirar dinero                  
-        4. Pagar Servicios                
-        5. Mostrar movimientos              
-        0. Salir                            
+// function menu (){
+//     let respuesta = prompt(`
+//         =========== Menu Bancario =============  
+//         ==================                                   
+//         1. Crear un usuario                
+//         2. Consignar en la cuenta         
+//         3. Retirar dinero                  
+//         4. Pagar Servicios                
+//         5. Mostrar movimientos              
+//         0. Salir                            
         
-        =======================================
-        `)
-        return respuesta
-        }
+//         =======================================
+//         `)
+//         return respuesta
+//         }
         
 
 
 function login(){
-    alert(`======CREACION DE USUARIO==========`
-    )
-    let numeroDocumento = prompt("Ingrese su numero de documento")
-    let nombre = prompt("Ingrese su nombre")
-    let clave = prompt("Ingrese su clave")
-    count += 1
-    // agregarUsuario(nombre,numeroDocumento)
-    cuentas.push({
-        "numeroDocumento": numeroDocumento,
-        "nombre": nombre,
-        "clave": clave,
-        "numCt": count.toString(),
-        "saldo": 0
+    Menu.innerHTML = "<p>======CREACION DE USUARIO==========</p>"
+    Inputs.innerHTML = `<input id='numeroDocumento' placeholder='numero de documento' type='text'>
+    <input id='nombre' placeholder='Nombre' type='text'>
+    <input id='clave' placeholder='Clave' type='text'>
+    <input id="enviar" type="button" value="Enviar">
+    `
+
+    const enviar = document.getElementById("enviar")
+    enviar.addEventListener("click", () => {
+        console.log("btn enviar")
+        const nombre = document.getElementById("nombre")
+        const clave = document.getElementById("clave")
+        const numeroDocumento = document.getElementById("numeroDocumento")
+        // let numeroDocumento = prompt("Ingrese su numero de documento")
+        // let nombre = prompt("Ingrese su nombre")
+        // let clave = prompt("Ingrese su clave")
+        count += 1
+        // agregarUsuario(nombre,numeroDocumento)
+        cuentas.push({
+            "numeroDocumento": numeroDocumento.value,
+            "nombre": nombre.value,
+            "clave": clave.value,
+            "numCt": count.toString(),
+            "saldo": 0
+        })
+    
+        movimientos.push({
+            "numCt": count.toString(),
+            "movimientos": []
+        })
+    
+        console.log(cuentas)
+        console.log(movimientos)
+        Mensajes.innerHTML = `<p>se creara una cuenta con estos datos </p>
+        <p>numero de documento: ${numeroDocumento.value}</p>
+        <p>nombre: ${nombre.value}</p>
+        <p>clave: ${clave.value}</p>
+        <p>numero de cuenta: ${count.toString()}</p>
+        <p>saldo: $0</p>
+        <p>cuenta creada exitosamente</p>
+    `
+
     })
 
-    movimientos.push({
-        "numCt": count.toString(),
-        "movimientos": []
-    })
-
-    console.log(cuentas)
-    console.log(movimientos)
-    alert(`se creara una cuenta con estos datos 
-        numero de documento: ${numeroDocumento}
-        nombre: ${nombre}
-        clave: ${clave}
-        numero de cuenta: ${count.toString()}
-        saldo: $0
-        `)
-    alert("cuenta creada exitosamente")
 }  
 
 function consignacion (){
@@ -113,17 +149,48 @@ function consignacion (){
     }else alert("cuenta no encontrada intente de nuevo")
 }
 
-function retiro (){
+function retiro (recibo){
     const respuesta1 = prompt("Ingrese su numero de cuenta")
     const respuesta2 = prompt("Ingrese su clave")
     let encontrada = false
+    let mensaje = "cuanto dinero desea retirar?"
+    let referencia = ""
+    let tipo = "retiro"
     cuentas.forEach(cuenta => {
         if(cuenta["numCt"] === respuesta1 && cuenta["clave"] === respuesta2){
             alert(`la cuenta a la que ingreso es 
             numero de cuenta: ${cuenta["numCt"]}
             nombre: ${cuenta["nombre"]}
             `)
-            saldo = prompt("cuanto dinero desea retirar?")
+            let descripcion = "se ha retirado "
+            if(recibo == "recibo"){
+                tipo = "Pago servicios"
+                mensaje = "cual es el valor del recibo"
+                let respuesta = prompt(`
+                    =========== Recibos =============  
+                    ==================                                   
+                    1. Energia                
+                    2. Agua         
+                    3. Gas                                       
+                    =======================================
+                    `)
+                referencia = prompt("cual es la referencia del recibo")
+                switch (respuesta) {
+                    case "1":
+                        descripcion = "pago de servicio de energia por "
+                        break;
+                    case "2":
+                        descripcion = "pago de servicio del agua por "
+                        break;
+                    case "3":
+                        descripcion = "pago de servicio del gas por "
+                        break;
+                
+                    default:
+                        break;
+                }
+            }
+            saldo = prompt(mensaje)
             valor = Number(saldo)
             if(cuenta["saldo"] < valor){
                 alert("no tiene suficiente saldo")
@@ -133,9 +200,9 @@ function retiro (){
                 if(movimiento["numCt"] === cuenta["numCt"]){
                     movimiento["movimientos"].push(
                         {
-                            "tipo": "retiro",
-                            "referencia": "",
-                            "descripcion": `se ha retirado ${saldo}`,
+                            "tipo": tipo,
+                            "referencia": referencia,
+                            "descripcion":  descripcion + saldo,
                             "saldo": `${cuenta['saldo']}`,
                         }
                     )
@@ -146,57 +213,76 @@ function retiro (){
     }
     });
     if(encontrada){
-        alert("retiro exitosa")
+        alert("transaccion exitosa")
     }else alert("cuenta no encontrada intente de nuevo")
 }
+
+
 
 function mostrarMovimientos(){
     const respuesta1 = prompt("Ingrese su numero de cuenta")
     const respuesta2 = prompt("Ingrese su clave")
     let encontrada = false
+    let mensaje = "no ahi movimientos registrados"
     cuentas.forEach(cuenta => {
         if(cuenta["numCt"] === respuesta1 && cuenta["clave"] === respuesta2){
             alert(`la cuenta a la que ingreso es 
             numero de cuenta: ${cuenta["numCt"]}
             nombre: ${cuenta["nombre"]}
+            
             `)
+            encontrada = true
             movimientos.forEach(movimiento => {
                 if(movimiento["numCt"] === cuenta["numCt"]){
-                    movimiento["movimiento"].forEach(Element => {
-                        alert(` "tipo": "retiro",
-                        "referencia": "",
-                        "descripcion": se ha retirado ${saldo},
-                        "saldo": ${cuenta['saldo']}`)
-                        encontrada = true
+                    console.log("hola")
+                    console.log(movimiento.movimientos)
+                    movimiento.movimientos.forEach(Element => {
+                        mensaje = "No ahi mas movimientos registrados"
+                        alert(`tipo: ${Element.tipo},
+                        referencia: ${Element.referencia},
+                        descripcion: ${Element.descripcion},
+                        saldo: ${Element.saldo}`)
                     })
     }
 })
     }
     });
     if(encontrada){
-        alert("retiro exitosa")
+        alert(mensaje)
     }else alert("cuenta no encontrada intente de nuevo")
 }
 
-while (!salir) {
-    let key = menu()
-    console.log(key)
-    switch (key) {
-        case "1":
-            login();
+// while (!salir) {
+    const respuesta = document.getElementById("respuesta") 
+    const btn = document.getElementById("btn")
+    let arriba = ""
+    btn.addEventListener("click", () => {
+        console.log(respuesta.value)
+        switch (respuesta.value) {
+            case "1":
+                login();
+               
+                break;
+            case "2":
+                consignacion()
+                break;
+            case "3":
+                retiro()
+                break;
+            case "4":
+                retiro("recibo")
+                break;
+            case "5":
+                mostrarMovimientos()
+                break;
+            case "0": 
+            alert("saliendo....")
+            salir = true;
             break;
-        case "2":
-            consignacion()
-            break;
-        case "3":
-            retiro()
-            break;
-        case "0": 
-        alert("saliendo....")
-        salir = true;
-        break;
-        default:
-            alert("seleccione una opcion correcta")
-            break
-    }    
-}
+            default:
+                // alert("seleccione una opcion correcta")
+                break
+        }    
+    })
+// }
+    

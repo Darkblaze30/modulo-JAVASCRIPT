@@ -1,0 +1,27 @@
+.titulo{
+    color: green;
+    margin-top: 20px;
+}
+
+#contenedor{
+    border: 1px solid gray;
+    border-radius: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+}
+
+.overItem{
+    padding: 6px;
+    background-color: aquamarine;
+    color: white;
+}
+
+#contenedor > div{
+    margin-bottom: 6px;
+    padding-left: 12px;
+}
+
+.seleccionar{
+    background-color: red;
+}

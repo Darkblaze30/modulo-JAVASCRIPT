@@ -1,29 +1,121 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banco ACME</title>
+    <title>Banco ACME - Cajero Automático</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #222;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .cajero {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        .menu {
+            text-align: left;
+            margin-bottom: 20px;
+            background: #444;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .menu p {
+            font-size: 16px;
+            padding: 5px;
+            border-bottom: 1px solid #555;
+        }
+
+        .inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input[type="text"], input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            background: #555;
+            color: white;
+        }
+
+        button {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #2ecc71;
+        }
+
+        .mensajes {
+            margin-top: 15px;
+            padding: 10px;
+            background: #444;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+    </style>
 </head>
 <body>
-    <div id="container">
-        <div id="Menu">
-            <p>===========Menu============</p>
-            <p>=1. Crear un usuario       =</p>
-            <p>=2. Consignar en la cuenta =</p>
-            <p>=3. Retirar dinero         =</p>
-            <p>=4. Pagar Servicios        =</p>
-            <p>=5. Mostrar movimientos    =</p>
-            <p>=0. Salir                  =</p>
-        </div>
-        <div id="Inputs">
-            <input id="respuesta" placeholder="que desea hacer" type="text">
-            <input id="btn" type="button" value="Seleccionar">
-        </div>
-        <div id="Mensajes">
 
+    <div id="container" class="cajero">
+        <h2>Banco ACME</h2>
+
+        <div class="menu">
+            <p>1. Crear un usuario</p>
+            <p>2. Consignar en la cuenta</p>
+            <p>3. Retirar dinero</p>
+            <p>4. Pagar Servicios</p>
+            <p>5. Mostrar movimientos</p>
+            <p>0. Salir</p>
+        </div>
+
+        <div class="inputs">
+            <input id="respuesta" placeholder="¿Qué desea hacer?" type="text">
+            <button id="btn">Seleccionar</button>
+        </div>
+
+        <div id="mensajes" class="mensajes">
+            <p>Bienvenido al cajero automático</p>
         </div>
     </div>
+
     <script src="main.js"></script>
+
 </body>
 </html>

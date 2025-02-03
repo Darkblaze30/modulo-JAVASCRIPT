@@ -1,0 +1,3 @@
+class LogoUser extends HTMLElement{
+    
+}

@@ -36,77 +36,7 @@ const container = document.getElementById("container")
 //     };
 //   }
 
-// function menu (){
-//     let respuesta = prompt(`
-//         =========== Menu Bancario =============  
-//         ==================                                   
-//         1. Crear un usuario                
-//         2. Consignar en la cuenta         
-//         3. Retirar dinero                  
-//         4. Pagar Servicios                
-//         5. Mostrar movimientos              
-//         0. Salir                            
-        
-//         =======================================
-//         `)
-//         return respuesta
-//         }
-        
 
-
-// function login(){
-//     Menu.innerHTML = "<p>======CREACION DE USUARIO==========</p>"
-//     Inputs.innerHTML = `<input id='numeroDocumento' placeholder='numero de documento' type='text'>
-//     <input id='nombre' placeholder='Nombre' type='text'>
-//     <input id='clave' placeholder='Clave' type='text'>
-//     <input id="enviar" type="button" value="Enviar">
-//     <input id="regresar" type="button" value="Regresar">
-//     `
-
-//     const enviar = document.getElementById("enviar")
-//     const Regresar = document.getElementById("regresar")
-//     enviar.addEventListener("click", () => {
-//         console.log("btn enviar")
-//         const nombre = document.getElementById("nombre")
-//         const clave = document.getElementById("clave")
-//         const numeroDocumento = document.getElementById("numeroDocumento")
-//         // let numeroDocumento = prompt("Ingrese su numero de documento")
-//         // let nombre = prompt("Ingrese su nombre")
-//         // let clave = prompt("Ingrese su clave")
-//         count += 1
-//         // agregarUsuario(nombre,numeroDocumento)
-//         cuentas.push({
-//             "numeroDocumento": numeroDocumento.value,
-//             "nombre": nombre.value,
-//             "clave": clave.value,
-//             "numCt": count.toString(),
-//             "saldo": 0
-//         })
-    
-//         movimientos.push({
-//             "numCt": count.toString(),
-//             "movimientos": []
-//         })
-    
-//         console.log(cuentas)
-//         console.log(movimientos)
-//         Mensajes.innerHTML = `<p>se creara una cuenta con estos datos </p>
-//         <p>numero de documento: ${numeroDocumento.value}</p>
-//         <p>nombre: ${nombre.value}</p>
-//         <p>clave: ${clave.value}</p>
-//         <p>numero de cuenta: ${count.toString()}</p>
-//         <p>saldo: $0</p>
-//         <p>cuenta creada exitosamente</p>
-//     `
-
-//     })
-//     Regresar.addEventListener("click", () => {
-//         console.log("regresar")
-//         container.innerHTML = MenuPrincipal
-//         asignarEventosMenu()
-//     })
-
-// }  
 
 function consignacion() {
     container.innerHTML = `
